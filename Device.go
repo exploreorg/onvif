@@ -86,6 +86,7 @@ type DeviceParams struct {
 	Username   string
 	Password   string
 	HttpClient *http.Client
+	TimeOffset int
 }
 
 // GetServices return available endpoints
@@ -285,7 +286,7 @@ func (dev Device) callMethodDo(endpoint string, method interface{}) (*http.Respo
 
 	//Auth Handling
 	if dev.params.Username != "" && dev.params.Password != "" {
-		soap.AddWSSecurity(dev.params.Username, dev.params.Password)
+		soap.AddWSSecurity(dev.params.Username, dev.params.Password, dev.params.TimeOffset)
 	}
 
 	return networking.SendSoap(dev.params.HttpClient, endpoint, soap.String())

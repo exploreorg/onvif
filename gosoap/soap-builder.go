@@ -243,7 +243,7 @@ func buildSoapRoot() *etree.Document {
 }
 
 //AddWSSecurity Header for soapMessage
-func (msg *SoapMessage) AddWSSecurity(username, password string) {
+func (msg *SoapMessage) AddWSSecurity(username, password string, timeOffset int) {
 	//doc := etree.NewDocument()
 	//if err := doc.ReadFromString(msg.String()); err != nil {
 	//	log.Println(err.Error())
@@ -251,7 +251,7 @@ func (msg *SoapMessage) AddWSSecurity(username, password string) {
 	/*
 		Getting an WS-Security struct representation
 	*/
-	auth := NewSecurity(username, password)
+	auth := NewSecurity(username, password, timeOffset)
 
 	/*
 		Adding WS-Security namespaces to root element of SOAP message
